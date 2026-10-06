@@ -1,0 +1,85 @@
+# ─────────────────────────────────────────────
+#  MooresCloud Holiday – Example Automations
+# ─────────────────────────────────────────────
+
+# 1. Warm welcome home – turn on a warm gradient when someone arrives
+automation:
+  alias: "Holiday: Welcome home"
+  trigger:
+    - platform: state
+      entity_id: person.your_name
+      to: home
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.holiday
+      data:
+        effect: Gradient Warm
+        brightness: 220
+
+# 2. Movie mode – dim to a cool blue when the TV turns on
+automation:
+  alias: "Holiday: Movie mode"
+  trigger:
+    - platform: state
+      entity_id: media_player.living_room_tv
+      to: playing
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.holiday
+      data:
+        rgb_color: [0, 80, 180]
+        brightness: 60
+
+# 3. Party rainbow – cycle on when a party scene is activated
+automation:
+  alias: "Holiday: Party rainbow"
+  trigger:
+    - platform: state
+      entity_id: input_boolean.party_mode
+      to: "on"
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.holiday
+      data:
+        effect: Rainbow
+        brightness: 255
+
+# 4. Goodnight – fade off at bedtime
+automation:
+  alias: "Holiday: Goodnight"
+  trigger:
+    - platform: time
+      at: "22:30:00"
+  action:
+    - service: light.turn_off
+      target:
+        entity_id: light.holiday
+
+# 5. Custom pattern – Australian flag colours alternating
+#    (use the set_pattern service for per-globe control)
+script:
+  holiday_aussie_flag:
+    alias: "Holiday: Aussie flag colours"
+    sequence:
+      - service: moorescloud_holiday.set_pattern
+        target:
+          entity_id: light.holiday
+        data:
+          lights: >
+            {% set red = "#ff0000" %}
+            {% set blue = "#00008b" %}
+            {% set white = "#ffffff" %}
+            {% set pattern = [] %}
+            {% for i in range(50) %}
+              {% if i % 3 == 0 %}
+                {% set pattern = pattern + [blue] %}
+              {% elif i % 3 == 1 %}
+                {% set pattern = pattern + [red] %}
+              {% else %}
+                {% set pattern = pattern + [white] %}
+              {% endif %}
+            {% endfor %}
+            {{ pattern }}

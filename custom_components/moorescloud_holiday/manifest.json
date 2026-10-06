@@ -1,0 +1,11 @@
+{
+  "domain": "moorescloud_holiday",
+  "name": "MooresCloud Holiday",
+  "version": "1.0.0",
+  "documentation": "https://github.com/moorescloud/iotas",
+  "requirements": [],
+  "dependencies": [],
+  "codeowners": [],
+  "iot_class": "local_polling",
+  "config_flow": true
+}

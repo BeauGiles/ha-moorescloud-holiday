@@ -1,0 +1,43 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add MooresCloud Holiday",
+        "description": "Enter the hostname or IP address of your Holiday light strip.",
+        "data": {
+          "host": "Hostname or IP address",
+          "port": "Port (default 80)",
+          "name": "Device name"
+        }
+      },
+      "reconfigure": {
+        "title": "Reconfigure MooresCloud Holiday",
+        "description": "Update the hostname or IP address of your Holiday light strip.",
+        "data": {
+          "host": "Hostname or IP address",
+          "port": "Port (default 80)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to the Holiday device. Make sure it is powered on and reachable.",
+      "unknown": "An unexpected error occurred."
+    },
+    "abort": {
+      "already_configured": "This Holiday device is already configured.",
+      "reconfigure_successful": "Re-configuration was successful."
+    }
+  },
+  "services": {
+    "set_pattern": {
+      "name": "Set Pattern",
+      "description": "Set each of the 50 globes to an individual colour.",
+      "fields": {
+        "lights": {
+          "name": "Lights",
+          "description": "A list of up to 50 hex colour strings (e.g. '#ff0000'). Shorter lists are padded with black."
+        }
+      }
+    }
+  }
+}
