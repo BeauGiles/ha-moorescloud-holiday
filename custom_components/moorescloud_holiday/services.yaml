@@ -1,0 +1,16 @@
+set_pattern:
+  name: Set Pattern
+  description: Set each of the 50 globes to an individual colour.
+  target:
+    entity:
+      integration: moorescloud_holiday
+      domain: light
+  fields:
+    lights:
+      name: Lights
+      description: A list of up to 50 hex colour strings. Shorter lists are padded with black.
+      required: true
+      example:
+        - "#ff0000"
+        - "#00ff00"
+        - "#0000ff"
